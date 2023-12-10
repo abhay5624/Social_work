@@ -1,0 +1,4 @@
+# inputs to be taken:
+username should be unique 
+collage email id
+password

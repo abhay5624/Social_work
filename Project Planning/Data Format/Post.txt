@@ -1,0 +1,17 @@
+#Room post 
+
+Room name 
+who send post (id)
+post pic 
+post text 
+
+#Global post
+who send post (id)
+post pic 
+post text 
+
+
+#Clubs Post 
+club name 
+who send post 
+post picpost description

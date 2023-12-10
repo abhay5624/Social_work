@@ -1,0 +1,6 @@
+1. user Profile
+2. Registration page
+3. rooms pages 
+5. user chat page 
+6. Global chat
+7. Global post 
