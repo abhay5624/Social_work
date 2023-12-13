@@ -1,0 +1,36 @@
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .footer{
+        width: 100%;
+        height: auto;
+        background-color: #190582;
+        display: flex;
+        justify-content: space-evenly;
+        overflow: hidden;
+        flex-direction: column;
+    }
+    .details{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 20px;
+    }
+    .social_credentials{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        gap: 20px;
+    }
+    @media (max-width:750px) {
+       .details{
+        /* flex-direction: column; */
+        
+        align-items: center;
+       }
+    }
