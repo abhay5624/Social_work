@@ -1,5 +1,5 @@
 import React from 'react'
-import Footercard from './footercard'
+import Footercard from './FooterCard'
 import '../css/footer.css'
 import { SocialIcon } from 'react-social-icons'
 export default function Footer() {

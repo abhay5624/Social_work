@@ -35,7 +35,7 @@ const register_post = async (req,res) => {
         const hash_password = await Bcryptjs.hash(password,saltRound)
         const UserCreater = await RegisterPost.create({firstName,phoneNo,email,password:hash_password})
         console.log(req.body);
-        res.status(200).send({message: UserCreater});    
+        res.status(200).send({message: UserCreater,token: await UserCreater.generateToken(),userId: RegisterPost._id.toString()});    
     }catch (error){
         console.log(error);
         res.status(400).send(error);

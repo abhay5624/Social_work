@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Bcryptjs = require("bcryptjs");
-
+const jwt = require('jsonwebtoken');
 const student = new mongoose.Schema({
     firstName: {
         type:String,
@@ -38,6 +38,19 @@ const student = new mongoose.Schema({
         next(error)
     }
  })
-
+student.methods.generateToken = async function(){
+    try {
+        return jwt.sign({
+            userId: this._id.toString(),
+            email: this.email,
+           // isAdmin: this.isAdmin,
+        },process.env.JWT_SECRET_KEYs,
+        {
+            expiresIn: "30d"
+        })
+    } catch (error) {
+        console.log(error);   
+    }
+}
 const Register = new mongoose.model("Student",student);
 module.exports=Register;

@@ -5,7 +5,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [collegeId, setCollegeId] = useState('');
   const [password, setPassword] = useState('');
-
+const [Phone, setPhone] = useState('')
   const handleLogin = () => {
     // Add your login logic here
     console.log('Logging in with:', username, password,collegeId);
@@ -19,10 +19,11 @@ const LoginForm = () => {
       <div className="signup-form">
         <h2>Sign Up</h2><br/>
         <div>Already have an account?<Link to="/login"> Login</Link></div><br/>
-        <form>
+        <form action='http://localhost:3001/api/auth/register' method='POST' >
           <label>
             <input
               type="text" placeholder='Username'
+              name='firstName'
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="input-field"
@@ -31,15 +32,27 @@ const LoginForm = () => {
           <br />
           <label>
             <input
+              type="number" placeholder='Phone number'
+              name='phoneNo'
+              value={Phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="input-field"
+              />
+          </label>
+          <br />
+          <label>
+            <input
               type="text" placeholder='College Id'
+              name= "email"
               onChange={(e) => setCollegeId(e.target.value)}
               className="input-field"
+              required
               />
           </label>
           <label>
             <input
               type="password" placeholder='Password'
-              value={password}
+              value={password} name='password'
               onChange={(e) => setPassword(e.target.value)}
               className="input-field"
               />
@@ -47,9 +60,9 @@ const LoginForm = () => {
           <br />
           <br />
        
-          <button type="button" onClick={handleLogin} className="signup-button">
-            Register
-          </button>
+          <input type="submit" onClick={handleLogin} className="signup-button" placeholder='Register'>
+            
+          </input>
         </form>
       </div>
       <div className="signup-image-container">

@@ -17,7 +17,7 @@ const LoginForm = () => {
 
       <div className="login-form">
         <h2>Login</h2><br/>
-        <div>New to website?<Link to="/signup"> Create an account</Link></div><br/>
+        <div>New to website?<Link to="/register"> Create an account</Link></div><br/>
         <form>
           <label>
             <input
