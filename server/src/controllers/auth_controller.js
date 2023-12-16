@@ -1,44 +1,73 @@
-const RegisterPost = require("../models/registration")
+const RegisterPost = require("../models/registration");
 const Bcryptjs = require("bcryptjs");
-const home = async (req,res) =>{
-    try{
-        res
-            .status(200)
-            .send(
-                "Hello from APP"
-                )
-    }catch(error){
-        console.log(error);
-    }
+const home = async (req, res) => {
+  try {
+    res.status(200).send("Hello from APP");
+  } catch (error) {
+    console.log(error);
+  }
 };
-const register = async (  req,res) => {
-    try{
-        res.status("200")
-        .send(
-            "welcome to registratio page"
-        )
-    }catch(error){
-        resizeBy.status(400).send({msg: "page not found"})
-        console.log(error);
-    }
-   
+const register = async (req, res) => {
+  try {
+    res.status("200").send("welcome to registratio page");
+  } catch (error) {
+    resizeBy.status(400).send({ msg: "page not found" });
+    console.log(error);
+  }
 };
 
-const register_post = async (req,res) => {
-    try{
-        const { firstName,phoneNo,email,password} =req.body;
-        const userExist = await RegisterPost.findOne({email});
-        if(userExist){
-            return res.status(400).json({msg: "email already exit"});
+
+
+const register_post = async (req, res) => {
+  try {
+    const { firstName, phoneNo, email, password } = req.body;
+    const userExist = await RegisterPost.findOne({ email });
+    if (userExist) {
+      return res.status(400).json({ msg: "email already exit" });
+    }
+    const UserCreater = await RegisterPost.create({
+      firstName,
+      phoneNo,
+      email,
+      password,
+    });
+    res
+      .status(201)
+      .json({
+        message: "Registration Successful",
+        token: await UserCreater.generateToken(),
+        userId: UserCreater._id.toString(),
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("internal server error");
+  }
+};
+
+
+const Login_Post = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const userExist = await RegisterPost.findOne({ email });
+        console.log(userExist);
+        if(!userExist){
+            return res.status(400).json({message: " invalid Credentials"});
         }
-        const saltRound = 10;
-        const hash_password = await Bcryptjs.hash(password,saltRound)
-        const UserCreater = await RegisterPost.create({firstName,phoneNo,email,password:hash_password})
-        console.log(req.body);
-        res.status(200).send({message: UserCreater,token: await UserCreater.generateToken(),userId: RegisterPost._id.toString()});    
-    }catch (error){
-        console.log(error);
-        res.status(400).send(error);
+        if(userExist.ComparePassword(password)){
+            res
+            .status(201)
+            .json({
+              message: "Login Successful",
+              token: await userExist.generateToken(),
+              userId: userExist._id.toString(),
+            });
+        }else{
+            res.status(401).json({message: "invalid email or password"});
+        }
+
+    } catch(error){
+        res.status(500).json("internal server error");
+
     }
 }
-module.exports = {home,register,register_post}
+module.exports = { home, register, register_post,Login_Post };

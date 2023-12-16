@@ -19,6 +19,7 @@
     /* color:#BF6AF4; */
     color:white;
     /* background-color: red; */
+    margin-right: 10%;
     width: 50%;
     height: auto;
     display: flex;
@@ -43,11 +44,16 @@
     background-color: #d1cde55a;
     backdrop-filter: blur(20px);
 }
+#navmenu a{
+    color: white;
+}
 @media (max-width:1000px) {
     #navmenu{
         font-size: 18px;
     }
-    
+    #navmenu a{
+        color: white;
+    }
 }
 @media (max-width:750px) {
     #navmenu{
