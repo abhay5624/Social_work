@@ -20,6 +20,21 @@ export default function Navbar() {
     </label>
 
     <div id='navmenu'>
+    <div className='search-form'>
+        <form>
+        
+            <input
+              type="text" placeholder='SEARCH'
+        
+              onChange={(e) => setSearch(e.target.value)}
+              className="input-field"
+              />
+       
+          </form>
+          <button type="button" onClick={handleSearch} className="search-button">
+            Search
+          </button>
+        </div>
         <div>
           <Link to="/home">Home</Link>
         </div>
@@ -37,23 +52,9 @@ export default function Navbar() {
 
         
         <div>
-        <Link to="/signup">Kuch bhi</Link>
+        <Link to="/profile">Kuch bhi</Link>
         </div>
-        <div className='search-form'>
-        <form>
-        
-            <input
-              type="text" placeholder='SEARCH'
-        
-              onChange={(e) => setSearch(e.target.value)}
-              className="input-field"
-              />
        
-          </form>
-          <button type="button" onClick={handleSearch} className="search-button">
-            Search
-          </button>
-        </div>
     </div>
 
     </div>

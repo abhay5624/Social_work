@@ -34,15 +34,24 @@
 }
 .search-form
 {
-    width: auto;
+    width: 40%;
     height: auto;
-
+background-color: #3F2F93;
     display: flex;
-    gap: 10px;
+padding-left: 10px;
+    border-radius: 10px;
     /* background-color: rebeccapurple; */
 }
+.search-form input{
+    width: 100%;
+    background-color:#3F2F93;
+    border: none;
+    color: white;
+}
 .search-form button{
-    background-color: rgb(72, 255, 72);
+    background-color: #3F2F93;
+    color: white;
+border-radius: 10px;
     border: none;
     padding: 10px;
     /* height: 40px; */
