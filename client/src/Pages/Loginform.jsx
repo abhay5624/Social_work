@@ -22,16 +22,13 @@ const LoginForm = () => {
         body: JSON.stringify(user)
       });
       console.log("login form: ",respond);
-      if(respond.ok){
         const data = await respond.json();
-        console.log(data);
         storTokeninLS(data.token);
         setUser({
           email: "",
           password: ""
         })
-        navigate('/home')
-      };  
+        navigate('/home')  
     } catch (error) {
      console.log("from frontEnd :",error);  
     }
