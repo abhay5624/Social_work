@@ -4,8 +4,12 @@ import '../css/navbar.css'
 import { useLocal } from '../store/auth_context'
 export default function Navbar() {
   const {isLoggedIn} = useLocal();
- 
+  const [search, setSearch] = useState('');
   
+  const handleSearch = () => {
+    // Add your login logic here
+    console.log('You Searched:', search);
+  };
   return (
     <>
     <div id='navbar'>
@@ -35,8 +39,20 @@ export default function Navbar() {
         <div>
         <Link to="/signup">Kuch bhi</Link>
         </div>
-        <div>
-        <Link to="/Logout">Kuch bhi</Link>
+        <div className='search-form'>
+        <form>
+        
+            <input
+              type="text" placeholder='SEARCH'
+        
+              onChange={(e) => setSearch(e.target.value)}
+              className="input-field"
+              />
+       
+          </form>
+          <button type="button" onClick={handleSearch} className="search-button">
+            Search
+          </button>
         </div>
     </div>
 
