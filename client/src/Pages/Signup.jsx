@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
 import { useLocal } from '../store/auth_context';
 import '../css/signup.css'; // Import the CSS file
+import SignupSvg from "../Assets/icons/sign_up.svg"
 import { Link, useNavigate } from 'react-router-dom'
 const LoginForm = () => {
   const [user, setUser] = useState({
     firstName: "",
     email: "",
     phoneNo: "",
-    password: ""
+    password: "",
+    avatar: ""
   });
   const {storTokeninLS} = useLocal();
   const navigate = useNavigate();
+  const {setData} = useLocal();
+  const convertToBase64 = (file) => {
+        const fileReader =new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          console.log(fileReader.result);
+          setUser({...user, avatar: `${fileReader.result}`})
+        };
+  }
+  const HandleImageUpload =  (e) => {
+    console.log(e.target.files[0]);
+      const file = e.target.files[0];
+      convertToBase64(file);
+      
+  }
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -21,10 +38,10 @@ const LoginForm = () => {
         },
         body: JSON.stringify(user)
       });
-      console.log(respond); 
+      setData(user);
       if(respond.ok){
-        const data = respond.json();
-        const store=localStorage.setItem("token", data.token);
+        const data =await respond.json();
+        storTokeninLS(data.token);
         setUser({
           firstName: "",
           phoneNo: "",
@@ -85,7 +102,12 @@ const LoginForm = () => {
               onChange={(e) => setUser({...user, password: `${e.target.value}`})}
               className="input-field"
               />
-          </label>
+            </label>
+            {/*
+              <label htmlFor="avatar">
+                <input type="file" name="avatar" id="avatar"accept='.jpeg,.png,jpg' label="Image" onChange={(e) => {HandleImageUpload(e)}}/>
+              </label>
+          */} 
           <br />
           <br />
        
@@ -95,7 +117,7 @@ const LoginForm = () => {
         </form>
       </div>
       <div className="signup-image-container">
-        
+        <img src={SignupSvg} alt="" />
       </div>
         </div>
       

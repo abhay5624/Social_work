@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/loginform.css'; // Import the CSS file
 import { Link } from 'react-router-dom'
 import { useLocal } from '../store/auth_context';
+import Loginimg from "../Assets/icons/Login.svg"
 const LoginForm = () => {
   const [user, setUser] = useState({
     email: "",
@@ -22,13 +23,16 @@ const LoginForm = () => {
         body: JSON.stringify(user)
       });
       console.log("login form: ",respond);
+      if(respond.ok){
         const data = await respond.json();
+        console.log("Data login ", data);
         storTokeninLS(data.token);
         setUser({
           email: "",
           password: ""
-        })
+        }) 
         navigate('/home')  
+      } 
     } catch (error) {
      console.log("from frontEnd :",error);  
     }
@@ -67,7 +71,7 @@ const LoginForm = () => {
         </form>
       </div>
       <div className="image-container">
-        
+      <img src={Loginimg} alt="" />
       </div>
               </div>
       

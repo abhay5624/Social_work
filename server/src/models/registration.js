@@ -19,6 +19,10 @@ const student = new mongoose.Schema({
         type:String,
         required:true,
     },
+    avatar: {
+        type: String,
+        default: false
+    },
     isAdmin: {
         type: Boolean,
         default: false

@@ -10,6 +10,8 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import Profile from './Pages/Profile.jsx';
+import UpdateProfile from './Pages/UpdateProfile.jsx';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
     <Route path='/signup' element={<Signup />}/>
     <Route path='/' element={<LoginForm />}/>
     <Route path="/logout" element={<Logout/>}/>
+    <Route path="/profile" element={<Profile/>}/>
+    <Route path = "updateProfile" element={<UpdateProfile/>} />
     </Routes>
     <Footer />
   </BrowserRouter>
