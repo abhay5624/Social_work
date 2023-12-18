@@ -159,5 +159,13 @@ try {
   })
 }
 }
-
-module.exports = { home, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile};
+const GetAllPost = async (req,res) => {
+  try {
+    const posts = await userPostmessage.find();
+    res.status(200).json({posts});
+  } catch (error) {
+    res.status(500).json({msg: "unauthorized user"});
+  }
+ 
+}
+module.exports = { home, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};

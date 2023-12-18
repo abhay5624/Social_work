@@ -15,4 +15,5 @@ router.route("/profile").get(profileMiddleware,authController.ProfileGet);
 router.route("/user").get(authMiddleware, authController.user);
 router.route("/post").post( postMiddleware,authController.userPosts);
 router.route("/post").get(postMiddleware,authController.GetProfile);
+router.route("/posts").get(postMiddleware,authController.GetAllPost);
 module.exports = router;

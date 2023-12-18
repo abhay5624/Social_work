@@ -7,6 +7,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [allPost, setallPosts] = useState([]);
     const [Data, setData] = useState({
         email: "",
         firstName: "",
@@ -27,6 +28,18 @@ export const AuthProvider = ({ children }) => {
       discription: "",
     })
     const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+    const AllPost = async(tkn) => {
+        const respond = await fetch("http://localhost:3001/api/auth/posts",{
+              method: "GET",
+              headers:{
+                  Authorization: `Bearer ${tkn}`,
+              }
+        });
+        if(respond.ok){
+          const data = await respond.json();
+          setallPosts(data.posts)
+        }
+    }
     const GetPosts = async (tkn) => {
     try {
         const respond = await fetch("http://localhost:3001/api/auth/post",{
@@ -63,8 +76,6 @@ export const AuthProvider = ({ children }) => {
       const storToken = localStorage.setItem("token", tkn);
       setToken(tkn);
       userAuthentication(tkn);
-      GetProfile(tkn);
-      GetPosts(tkn);
       return storToken;
     };
   
@@ -90,6 +101,9 @@ export const AuthProvider = ({ children }) => {
         if (respond.ok) {
           const data = await respond.json();
           setData(data.userData);
+          GetProfile(tkn);
+          GetPosts(tkn);
+          AllPost(tkn);
         } else {
           console.log("Error from authorization: ", respond.json());
         }
@@ -100,12 +114,11 @@ export const AuthProvider = ({ children }) => {
   
     useEffect(() => {
       userAuthentication(token);
-      GetProfile(token);
-      GetPosts(token);
+      
     }, [token]); // Add token as a dependency
   
     return (
-      <AuthContext.Provider value={{ isLoggedIn, storTokeninLS, LogoutUser, Data,setData,userProfile ,setUserProfile,posts,setPosts
+      <AuthContext.Provider value={{ isLoggedIn, storTokeninLS, LogoutUser,allPost, Data,setData,userProfile ,setUserProfile,posts,setPosts
       }}>
         {children}
       </AuthContext.Provider>

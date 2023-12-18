@@ -6,7 +6,6 @@ const profileMiddleware = async(req, res,next) => {
     try {
         const isVerified = jwt.verify(jwtToken,process.env.JWT_SECRET_KEY);
         const profile = await UserProfile.findOne({id: isVerified.userId});
-        console.log(isVerified);
         req.profile = profile;
         next();  
     } catch (error) {
