@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import Profile from './Pages/Profile.jsx';
 import UpdateProfile from './Pages/UpdateProfile.jsx';
+import CreatePost from './Pages/CreatePost.jsx';
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
     <Route path='/' element={<LoginForm />}/>
     <Route path="/logout" element={<Logout/>}/>
     <Route path="/profile" element={<Profile/>}/>
-    <Route path = "updateProfile" element={<UpdateProfile/>} />
+    <Route path = "/updateProfile" element={<UpdateProfile/>} />
+    <Route path = "/createPost" element = {<CreatePost/>} />
     </Routes>
     <Footer />
   </BrowserRouter>

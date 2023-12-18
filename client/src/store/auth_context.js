@@ -13,6 +13,12 @@ export const AuthProvider = ({ children }) => {
         phoneNo: "",
         _id: ""        
     });
+    const [posts , setPosts] = useState([{
+        title: '',
+        postImg: "",
+        description: "",
+        postImg: '',
+    }])
     const [userProfile, setUserProfile] = useState({
       id: Data._id,
       headLine: "",
@@ -21,7 +27,22 @@ export const AuthProvider = ({ children }) => {
       discription: "",
     })
     const [isLoggedIn, setIsLoggedIn] = useState(!!token);
-  
+    const GetPosts = async (tkn) => {
+    try {
+        const respond = await fetch("http://localhost:3001/api/auth/post",{
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${tkn}`,
+          }
+        });
+        if(respond.ok){
+          const postData = await respond.json();
+          setPosts(postData.PostToSend);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    }
     const GetProfile = async(tkn) => {
       try {
         const respond = await fetch("http://localhost:3001/api/auth/profile",{
@@ -31,7 +52,6 @@ export const AuthProvider = ({ children }) => {
         }
       })
       const profile = await respond.json();
-      console.log("from Getprofile",profile.userprofile)
       setUserProfile(profile.userprofile);
       } catch (error) {
         console.log(error);
@@ -44,6 +64,7 @@ export const AuthProvider = ({ children }) => {
       setToken(tkn);
       userAuthentication(tkn);
       GetProfile(tkn);
+      GetPosts(tkn);
       return storToken;
     };
   
@@ -51,6 +72,9 @@ export const AuthProvider = ({ children }) => {
       const logoutbhai = localStorage.removeItem("token");
       setIsLoggedIn(false); 
       setToken("");
+      setData({});
+      setPosts([]);
+
       return logoutbhai;
     };
   
@@ -65,7 +89,6 @@ export const AuthProvider = ({ children }) => {
         });
         if (respond.ok) {
           const data = await respond.json();
-          console.log("from authentication: ",data);
           setData(data.userData);
         } else {
           console.log("Error from authorization: ", respond.json());
@@ -78,10 +101,12 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
       userAuthentication(token);
       GetProfile(token);
+      GetPosts(token);
     }, [token]); // Add token as a dependency
   
     return (
-      <AuthContext.Provider value={{ isLoggedIn, storTokeninLS, LogoutUser, Data,setData,userProfile ,setUserProfile}}>
+      <AuthContext.Provider value={{ isLoggedIn, storTokeninLS, LogoutUser, Data,setData,userProfile ,setUserProfile,posts,setPosts
+      }}>
         {children}
       </AuthContext.Provider>
     );

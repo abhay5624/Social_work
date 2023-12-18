@@ -2,18 +2,23 @@ import React from 'react'
 import { useLocal } from '../store/auth_context'
 import Avatar from "../Assets/Image/avatar.jpg"
 import styled from 'styled-components';
+import Loading from "../Assets/Image/Loading.png"
 import Post from '../components/Post';
 import { useNavigate } from 'react-router-dom';
 const Profile = () => {
     const {Data} = useLocal();
     const {userProfile} = useLocal();
-    console.log("from profile: ",Data);
     const Navigate = useNavigate();
   return (
     <ProfileDiv>
+      {
+        (!Data.firstName)? <div className="loader">
+          <img src={Loading} alt="" />  
+        </div>:
+      <>
         <div className="backdroundDiv">
-          <img src={(userProfile.background)? userProfile.background : ""} alt="" />
-          <div className="avatar"><img src={(userProfile.avatar)? userProfile.avatar: Avatar} alt="We need your profile" /></div>
+        {(userProfile)? <img src={userProfile.background} alt="" /> : <img src={Loading} alt="" />}
+          <div className="avatar"><img src={(userProfile)? userProfile.avatar: Avatar} alt="We need your profile" /></div>
         </div>
         <div className="nameDetail">
           <div className="flexbox">
@@ -21,16 +26,27 @@ const Profile = () => {
           <button onClick={() => {Navigate('/updateProfile')}}>Edit Profile</button>
           </div>
           <p style={{fontWeight: 600,fontSize: "20px"}}>{Data.email.split("@nitjsr.ac.in")}</p>
-          <p style={{fontWeight: 500}}>{userProfile.headLine}
+          <p style={{fontWeight: 500}}>{userProfile ? userProfile.headLine: ""}
             </p>
-          <p>{userProfile.discription}</p>
+          <p>{userProfile? userProfile.discription: ""}</p>
           <p>{Data.email}</p>
         </div>
+        ()
         <Post />
+        </>
+      }
     </ProfileDiv>
   )
 }
 const ProfileDiv = styled.div`
+.loader{
+  width: 100vw;
+  height: 100vh;
+  background: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .flexbox{
   display: flex;
   justify-content: space-between;

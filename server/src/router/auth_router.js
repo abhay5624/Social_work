@@ -6,10 +6,13 @@ const validate = require("../middleware/validate_middleware");
 const LoginSchema = require("../validators/login_validation");
 const authMiddleware = require("../middleware/authMiddleware");
 const profileMiddleware = require("../middleware/profileMiddleware")
+const postMiddleware = require("../middleware/postMiddleware")
 router.route("/").get(authController.home);
 router.route("/register").post(validate(signupSchema),authController.register_post);
 router.route("/login").post(validate(LoginSchema),authController.Login_Post);
 router.route("/profile").post(authController.profileAdd);
 router.route("/profile").get(profileMiddleware,authController.ProfileGet);
 router.route("/user").get(authMiddleware, authController.user);
+router.route("/post").post( postMiddleware,authController.userPosts);
+router.route("/post").get(postMiddleware,authController.GetProfile);
 module.exports = router;

@@ -1,6 +1,6 @@
 const RegisterPost = require("../models/registration");
 const ProfilePost = require("../models/profile")
-
+const userPostmessage = require("../models/posts");
 const home = async (req, res) => {
   try {
     res.status(200).send("Hello from APP");
@@ -12,7 +12,7 @@ const register = async (req, res) => {
   try {
     res.status("200").send("welcome to registratio page");
   } catch (error) {
-    resizeBy.status(400).send({ msg: "page not found" });
+    res.status(400).send({ msg: "page not found" });
     console.log(error);
   }
 };
@@ -25,13 +25,11 @@ try {
 }
 };
 const profileAdd = async(req,res) => {
-  console.log("an profile updation ",req.body)
   const {id,avatar,background,headLine,discription} =req.body;
   const profileExist = await ProfilePost.findOne({ id });
   if(!profileExist){
     try {
       const profileCreate = await ProfilePost.create({id,avatar,background,headLine,discription});
-      console.log(profileCreate);
       res
       .status(201)
       .json({
@@ -52,7 +50,6 @@ const profileAdd = async(req,res) => {
           avatar,background,headLine,discription
         }
     });
-    console.log(result);
     res
       .status(201)
       .json({
@@ -72,12 +69,12 @@ const profileAdd = async(req,res) => {
 const register_post = async (req, res) => {
   try {
     const { firstName, phoneNo, email, password, avatar } = req.body;
-    console.log("req body is: ",req.body);
+    
     const userExist = await RegisterPost.findOne({ email });
     if (userExist) {
       return res.status(400).json({ msg: "email already exit" });
     }
-    console.log("req body is: ",req.body);
+    
     const UserCreater = await RegisterPost.create({
       firstName,
       phoneNo,
@@ -85,7 +82,7 @@ const register_post = async (req, res) => {
       password,
       avatar
     });
-    console.log(UserCreater);
+   
     res
       .status(201)
       .json({
@@ -94,7 +91,7 @@ const register_post = async (req, res) => {
         userId: UserCreater._id.toString(),
       });
   } catch (error) {
-    console.log(error);
+    
     res.status(500).json("internal server error");
   }
 };
@@ -102,7 +99,6 @@ const Login_Post = async (req, res) => {
     try {
         const {email, password} = req.body;
         const userExist = await RegisterPost.findOne({ email });
-        console.log(userExist);
         if(!userExist){
             return res.status(400).json({message: " invalid Credentials"});
         }
@@ -131,7 +127,37 @@ const user = async (req,res) => {
     console.log(`error from the user route ${error}`);
   }
 };
+const userPosts = async (req,res) => {
+    try {
+      const { postImg, title, description} = req.body;
+      const PostCreation = await userPostmessage.create({
+        userID: req.userId, postImg, title, description
+      });
+      res.status(201)
+      .json({
+        message: "Post created Successful",
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Error from post route"
+      })
+    }
+}
+const GetProfile = async (req,res) => {
+try {
+  const PostToSend = await userPostmessage.find({userID: req.userId});
+  if(PostToSend){
+      res.status(200).json({PostToSend});
+  }else{
+    res.status(404).json({
+      msg: "Posts not found"
+    })
+  }
+} catch (error) {
+  res.status(404).json({
+    msg: "Posts not found"
+  })
+}
+}
 
-
-
-module.exports = { home, register, register_post,Login_Post,user,profileAdd,ProfileGet };
+module.exports = { home, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile};
