@@ -6,9 +6,10 @@ import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 export default function Homepage() {
   const { allPost }= useLocal();
+  const token = localStorage.getItem("token");
   const Navigate = useNavigate();
   return (
-    allPost[0] ? (
+    token ? (
     <div style={{display: 'flex'}}>
     <Sidebar/>
     <div>
@@ -27,7 +28,7 @@ export default function Homepage() {
         }
     </AllPost>
     
-    <div className='homepage'>
+    {/* <div className='homepage'>
         <div className='left'></div>
         <div className='right'>
             <div id='top'>Hey Buddy! New here</div>
@@ -35,7 +36,7 @@ export default function Homepage() {
 non organized society, designed to ruin your day, time and 
 career.</div>
         </div>
-    </div>    
+    </div>     */}
     </div>
     </div>
     ): Navigate("../login"))

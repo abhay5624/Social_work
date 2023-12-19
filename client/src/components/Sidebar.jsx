@@ -30,6 +30,7 @@ width: 15%;
 color: white;
 height: 100vh;
 position: fixed;
+z-index: 10;
 left: 0;
 a{
     margin: 5px;

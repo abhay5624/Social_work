@@ -48,7 +48,7 @@ const LoginForm = () => {
           email: "",
           password: ""
         })
-        navigate('/home')
+        navigate('/')
       } 
     } catch (error) {
      console.log("from frontEnd :",error);  

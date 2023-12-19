@@ -30,6 +30,10 @@ const profileAdd = async(req,res) => {
   if(!profileExist){
     try {
       const profileCreate = await ProfilePost.create({id,avatar,background,headLine,discription});
+      const result = await RegisterPost.updateOne({_id: profileExist._id},{
+        $set: {
+          avatar
+        }});
       res
       .status(201)
       .json({
@@ -168,4 +172,20 @@ const GetAllPost = async (req,res) => {
   }
  
 }
-module.exports = { home, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};
+const SearchPersonHandle = async (req,res) => {
+  try {
+    const type = req.query.name+"@nitjsr.ac.in";
+    
+    const User = await RegisterPost.findOne({email: type}).select({password: 0});
+    const PostToSend = await ProfilePost.findOne({id: User._id});
+    res.status(200).json({User,PostToSend});
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({msg: "user not found"})
+  }
+}
+const SearchPostHandle = async (req,res) => {
+    const type = req.query.name;
+
+}
+module.exports = { home,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};

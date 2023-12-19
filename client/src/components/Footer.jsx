@@ -7,8 +7,7 @@ export default function Footer() {
    <>
     <div className='footer'>
       <div className='details'>
-        
-        <Footercard phone="1234567890" email="abc@gmail.com" name="hello hii byebye " caption="sudeepbhai"/>
+        <div style={{width: "30%",minHeight:"100px"}}></div>        
         <Footercard phone="1234567890" email="abc@gmail.com" name="hello hii byebye " caption="sudeepbhai"/>
         <Footercard phone="1234567890" email="abc@gmail.com" name="hello hii byebye " caption="sudeepbhai"/>
         <Footercard phone="1234567890" email="abc@gmail.com" name="hello hii byebye " caption="sudeepbhai"/>

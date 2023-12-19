@@ -13,7 +13,7 @@ import {
 import Profile from './Pages/Profile.jsx';
 import UpdateProfile from './Pages/UpdateProfile.jsx';
 import CreatePost from './Pages/CreatePost.jsx';
-
+import Search from './Pages/Search.jsx';
 function App() {
   return (
   <>
@@ -27,6 +27,7 @@ function App() {
     <Route path="/profile" element={<Profile/>}/>
     <Route path = "/updateProfile" element={<UpdateProfile/>} />
     <Route path = "/createPost" element = {<CreatePost/>} />
+    <Route path = "/search" element = {<Search/>} />
     </Routes>
     <Footer />
   </BrowserRouter>

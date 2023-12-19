@@ -16,4 +16,6 @@ router.route("/user").get(authMiddleware, authController.user);
 router.route("/post").post( postMiddleware,authController.userPosts);
 router.route("/post").get(postMiddleware,authController.GetProfile);
 router.route("/posts").get(postMiddleware,authController.GetAllPost);
+router.route("/searchPerson").get(authController.SearchPersonHandle);
+router.route("/searchPost").get(authController.SearchPostHandle);
 module.exports = router;
