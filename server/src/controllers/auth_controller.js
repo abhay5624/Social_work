@@ -207,4 +207,29 @@ const PostDelete = async (req,res) => {
       
     }
 }
-module.exports = { home,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};
+const updatePost = async (req,res) => {
+  try {
+      const { id,postImg, title, description,tags} = req.body;
+
+      const update = await userPostmessage.updateOne({_id: id},
+      {
+        $set: {
+            postImg, title, description,tags
+        }
+      });
+      console.log(update);
+      //console.log(req.body);
+      res.status(201)
+      .json({
+        message: "Post updated Successful",
+      });
+  } catch (error) {
+    res.status(400)
+      .json({
+        message: "Post can't be updated",
+      });
+  }
+    
+
+}
+module.exports = { home,updatePost,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};

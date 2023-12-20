@@ -3,6 +3,7 @@ import { useLocation ,useNavigate} from 'react-router-dom'
 import { useLocal } from '../store/auth_context';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
+import UpdatePopup from '../components/UpdatePopup';
 const PostById = () => {
     const {posts} = useLocal();
     const Location = useLocation();
@@ -66,6 +67,7 @@ const PostById = () => {
         )): ""}
         </div>
     </PostDiv>
+    <UpdatePopup data={data}/>
     </>
   )
 }
