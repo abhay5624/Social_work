@@ -8,6 +8,11 @@ export default function Navbar() {
   useEffect(() => {
     setLog(isLoggedIn);
   }, [isLoggedIn]);
+  const [search,setSearch]=useState();
+  const handleSearch = () => {
+    // Add your login logic here
+    console.log('You Searched:', search);
+  };
   return (
     <>
       <div id="navbar">
@@ -18,6 +23,21 @@ export default function Navbar() {
         </label>
 
         <div id="navmenu">
+        <div className='search-form'>
+        <form>
+        
+            <input
+              type="text" placeholder='SEARCH'
+        
+              onChange={(e) => setSearch(e.target.value)}
+              className="input-field"
+              />
+       
+          </form>
+          <button type="button" onClick={handleSearch} className="search-button">
+            Search
+          </button>
+          </div>
           <div>
             <Link to="/home">Home</Link>
           </div>
