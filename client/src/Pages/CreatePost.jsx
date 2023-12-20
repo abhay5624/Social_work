@@ -6,12 +6,14 @@ const CreatePost = () => {
     const {userProfile} = useLocal();
     const {posts} = useLocal();
     const {Data} = useLocal();
+    const [tag, setTag] = useState();
     const Navigate = useNavigate();
     const {setPosts} = useLocal();
     const [PostData, setPostData] = useState({
         title: "",
         postImg: "",
-        description: ""
+        description: "",
+        tags: []
     })
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,7 +73,15 @@ const CreatePost = () => {
                      
                     <h4 >Post Images</h4> 
                         <input type="file" name="postImg" id="postImg" accept='.jpeg,.png,.jpg' onChange={(e) => {HandleImage(e)}}/>
-                    
+                        <div className="addbtn" onClick={(e) => {setPostData({...PostData, tags: [...PostData.tags,tag]})}}>Add Tags</div>
+                        <input type="text" name='tags' placeholder='Enter New Tag' onChange={(e) => {setTag(e.target.value)}}/>
+                        <div className='tags' style={{width: "100%"}}>
+                        {
+                            PostData.tags.map((element)=> (
+                                <button style={{margin: "5px"}}>{element}</button>
+                            ))
+                        }
+                        </div>    
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -83,8 +93,27 @@ const CreatePost = () => {
 const StyledPost = styled.div`
 width: 80%;
 margin-left:10%;
-
 padding-top: 50px;
+.addbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 10px 20px;
+    &:hover{
+        background-color: #190582;
+        color: white;
+        border: white;
+    }
+}
+.tags{
+    
+    display: grid;
+    grid-column: span 2;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+}
 h1,h2{
     text-align: center;
     color: black;

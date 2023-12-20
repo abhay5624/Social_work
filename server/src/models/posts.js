@@ -12,6 +12,13 @@ const userposts = new mongoose.Schema({
     description: {
         type: String,
         required: true
+    },
+    tags: {
+        type: [String],
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 

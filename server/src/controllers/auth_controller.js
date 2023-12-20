@@ -133,9 +133,9 @@ const user = async (req,res) => {
 };
 const userPosts = async (req,res) => {
     try {
-      const { postImg, title, description} = req.body;
+      const { postImg, title, description,tags} = req.body;
       const PostCreation = await userPostmessage.create({
-        userID: req.userId, postImg, title, description
+        userID: req.userId, postImg, title, description,tags
       });
       res.status(201)
       .json({
@@ -188,4 +188,23 @@ const SearchPostHandle = async (req,res) => {
     const type = req.query.name;
 
 }
-module.exports = { home,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};
+const PostDelete = async (req,res) => {
+  const posts = await userPostmessage.findOne({_id: req.body.id});
+  console.log("Posts deleted :",posts.userID);
+    try {
+      if(req.body.userId== posts.userID){
+        const result = await userPostmessage.deleteOne({ _id: req.body.id });
+        if (result.deletedCount === 1) {
+          res.status(200).json({ message: 'Document deleted successfully' });
+        } else {
+          res.status(404).json({ message: 'Document not found' });
+        }
+      }else{
+        res.status(500).json({msg: "unauthorized to delete this post"})
+      }
+      
+    } catch (error) {
+      
+    }
+}
+module.exports = { home,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};

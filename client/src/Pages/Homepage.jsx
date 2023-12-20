@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../css/homepage.css'
 import { useLocal } from '../store/auth_context';
 import styled from 'styled-components';
@@ -6,14 +6,24 @@ import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 export default function Homepage() {
   const { allPost }= useLocal();
-  const token = localStorage.getItem("token");
+  
   const Navigate = useNavigate();
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if(!token){    
+    
+    console.log("this run");
+    Navigate("/login")
+  }
+}, [])
+
+ 
   return (
-    token ? (
+  (
     <div style={{display: 'flex'}}>
     <Sidebar/>
     <div>
-    <h2 style={{textAlign: 'center',color: 'black',padding: "100px"}}>All the posts are Here</h2>
+    <h2 style={{textAlign: 'center',color: 'black',padding: "100px",marginLeft: "200px"}}>All the posts are Here</h2>
 
     <AllPost>
         {allPost ?
@@ -39,14 +49,15 @@ career.</div>
     </div>     */}
     </div>
     </div>
-    ): Navigate("../login"))
+    ))
 }
 const AllPost = styled.div`
 width: 70%;
-margin-left: 20%;
+margin-left: 30%;
 display: grid;
 grid-template-columns: auto auto auto auto;
 gap: 20px;
+min-height: 60vh;
 div{
   padding: 10px;
 }

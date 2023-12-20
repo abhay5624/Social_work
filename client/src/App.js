@@ -5,6 +5,7 @@ import Homepage from './Pages/Homepage.jsx';
 import Signup from './Pages/Signup.jsx';
 import LoginForm from './Pages/Loginform.jsx';
 import Logout from './Pages/Logout.jsx';
+import { useEffect } from 'react';
 import {
   BrowserRouter,
   Route,
@@ -14,7 +15,16 @@ import Profile from './Pages/Profile.jsx';
 import UpdateProfile from './Pages/UpdateProfile.jsx';
 import CreatePost from './Pages/CreatePost.jsx';
 import Search from './Pages/Search.jsx';
+import PostById from './Pages/PostById.jsx';
+import { useLocal } from './store/auth_context.js';
 function App() {
+  const {setallPosts} = useLocal();
+  const {setPosts} = useLocal();
+  useEffect(() => {
+    setallPosts();
+    setPosts();
+  }, [])
+  
   return (
   <>
   <BrowserRouter>
@@ -27,7 +37,9 @@ function App() {
     <Route path="/profile" element={<Profile/>}/>
     <Route path = "/updateProfile" element={<UpdateProfile/>} />
     <Route path = "/createPost" element = {<CreatePost/>} />
-    <Route path = "/search" element = {<Search/>} />
+    <Route path = "/search" element = {<Search/>} />  
+    <Route path="/post/:id" element = {<PostById/>} />
+
     </Routes>
     <Footer />
   </BrowserRouter>

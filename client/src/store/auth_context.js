@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
         postImg: "",
         description: "",
         postImg: '',
+        tags: [],
     }])
     const [userProfile, setUserProfile] = useState({
       id: Data._id,
@@ -118,7 +119,7 @@ export const AuthProvider = ({ children }) => {
     }, [token]); // Add token as a dependency
   
     return (
-      <AuthContext.Provider value={{ isLoggedIn, storTokeninLS, LogoutUser,allPost, Data,setData,userProfile ,setUserProfile,posts,setPosts
+      <AuthContext.Provider value={{ isLoggedIn, storTokeninLS, LogoutUser,allPost, Data,setData,userProfile ,setUserProfile,posts,setPosts,setallPosts
       }}>
         {children}
       </AuthContext.Provider>

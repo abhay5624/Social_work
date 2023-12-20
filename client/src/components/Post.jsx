@@ -13,10 +13,13 @@ const Post = () => {
     {
            posts? posts.map((data) => {
             return (
-            <div className="ptdiv" key={data.userID}>
+            <div className="ptdiv" key={data.userID} onClick={()=>{Navigate(`../post/${data._id}`)}}>
                 <img src={data.postImg} alt="This is user image" />
                 <h3>{data.title}</h3>
                 <p>{data.description}</p>
+                {data.tags.map((e) => (
+                    <button className='tag'>{e}</button>
+                    ))}
             </div>
             )}): ""
     }
@@ -35,6 +38,17 @@ margin-left: 5vw;
 margin-right: 5vw; 
 display: grid;
 grid-template-columns: 30% 30% 30%;
+.tag{
+    padding: 10px 20px;
+    margin: 3px;
+    color: white;
+    background: #191582;
+    border-radius: 5px;
+    border: none;
+    &:hover{
+        background: #194582; 
+    }
+}
 .createPost{
     margin: 50px;
     font-size: 20px;

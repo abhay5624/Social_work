@@ -7,11 +7,13 @@ const Sidebar = () => {
     const {userProfile} = useLocal();
   return (
     <AsideBar>
-
-    <img src={userProfile.avatar} style={{borderRadius: "50%"}} alt="" />
-    <h4>{Data.firstName}</h4>
+    {userProfile? <img src={userProfile.avatar} style={{borderRadius: "50%"}} alt="" />: ""}    
+    {Data? <h4>{Data.firstName}</h4>:""}
+   
+    
     <div className="line"></div>
-    <h5 style={{gridColumn: "span 2",textAlign: "center"}}>{userProfile.headLine}</h5>
+    {userProfile?     <h5 style={{gridColumn: "span 2",textAlign: "center"}}>{userProfile.headLine}</h5>
+:""}
     <Link style={{gridColumn: "span 2"}} to="../profile">My Profile</Link>
     <Link style={{gridColumn: "span 2"}} to="../updateProfile">Edit my Profile</Link>
     <Link style={{gridColumn: "span 2"}} to="../createPost">Create a new Post</Link>

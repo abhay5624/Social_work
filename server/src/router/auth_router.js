@@ -18,4 +18,6 @@ router.route("/post").get(postMiddleware,authController.GetProfile);
 router.route("/posts").get(postMiddleware,authController.GetAllPost);
 router.route("/searchPerson").get(authController.SearchPersonHandle);
 router.route("/searchPost").get(authController.SearchPostHandle);
+router.route("/post").delete(postMiddleware,authController.PostDelete);
+
 module.exports = router;
