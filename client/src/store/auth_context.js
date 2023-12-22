@@ -38,7 +38,8 @@ export const AuthProvider = ({ children }) => {
         });
         if(respond.ok){
           const data = await respond.json();
-          setallPosts(data.posts)
+          console.log(data.posts);
+          setallPosts(data.posts);
         }
     }
     const GetPosts = async (tkn) => {
@@ -52,6 +53,7 @@ export const AuthProvider = ({ children }) => {
         if(respond.ok){
           const postData = await respond.json();
           setPosts(postData.PostToSend);
+          console.log("this is from auth: ",posts)
         }
     } catch (error) {
         console.log(error);

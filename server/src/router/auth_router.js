@@ -21,4 +21,5 @@ router.route("/searchPerson").get(authController.SearchPersonHandle);
 router.route("/searchPost").get(authController.SearchPostHandle);
 router.route("/post").delete(postMiddleware,authController.PostDelete);
 router.route("/post").put(postMiddleware,authController.updatePost)
+router.route("/postById").get(postMiddleware,authController.SearchPostById)
 module.exports = router;

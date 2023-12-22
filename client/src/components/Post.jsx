@@ -1,12 +1,11 @@
-import React from 'react'
-import Postimg from "../Assets/Image/wallpaper.jpg"
+import React,{useState} from 'react'
 import { useLocal } from '../store/auth_context';
-import styled from 'styled-components';
 import '../css/componentcss/post.css'
 import { useNavigate } from 'react-router-dom';
 const Post = () => {
     const {posts} = useLocal();
     const Navigate = useNavigate();
+    console.log("This is from posts ",posts)
   return (
     <><h1 style={{marginLeft: "7vw",marginTop: "100px"}}>Posts</h1>
     <br/><br/>
@@ -15,15 +14,16 @@ const Post = () => {
     {
            posts? posts.map((data) => {
             return (
-            <div className="ptdiv" key={data.userID} onClick={()=>{Navigate(`../post/${data._id}`)}}>
+            <div className="ptdiv" key={data._id}>
                 <img src={data.postImg} alt="This is user image" />
                 <h3>{data.title}</h3>
                 <p>{data.description}</p>
                 <div className='tags'>
-                {data.tags.map((e) => (
+                  {data.tags.map((e) => (
                     <button className='tag'>{e}</button>
                     ))}
                     </div>
+                  <button  onClick={()=>{Navigate(`../post/${data._id}`)}}>Read More</button>
             </div>
             )}): ""
     }

@@ -9,10 +9,9 @@ export default function Homepage() {
   const { allPost }= useLocal();
   
   const Navigate = useNavigate();
-useEffect(() => {
+  useEffect(() => {
   const token = localStorage.getItem("token");
-  if(!token){    
-    
+  if(!token){      
     console.log("this run");
     Navigate("/login")
   }
@@ -22,7 +21,7 @@ useEffect(() => {
   return (
   (
     <>
-    <div style={{display: 'flex'}}>
+    <div style={{display: 'flex',minHeight: "100vh"}}>
     <Sidebar/>
     <div className='homepage'>
     <h2 style={{textAlign: 'center',color: 'black',padding:'20px'}}>All the posts are Here</h2>

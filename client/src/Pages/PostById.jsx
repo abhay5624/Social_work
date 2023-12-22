@@ -11,18 +11,29 @@ const PostById = () => {
     const Location = useLocation();
     const ID = Location.pathname.split("/post/");
     const [data , setData] = useState({
+        _id: {},
         title: "",
         description: "",
         postImg: "",
         tags: [],
     });
-    console.log("This is from post: ",data);
+    //console.log("This is from post: ",data);
     const Navigate = useNavigate();
     const GetPost = async () => {
-        const pt = await posts.filter((number) => {
-            return number._id =ID;
-        })[0];
-        setData(await pt)
+        const tkn = localStorage.getItem("token");
+        const pt = await fetch(`http://localhost:3001/api/auth/postById?id=${ID[1]}`,{
+            headers: {
+                Authorization: `Bearer ${tkn}`
+            }
+        });
+        if(pt.ok){
+            const dataof = await pt.json();
+            console.log(dataof.data);
+            setData(await dataof.data);
+        }else{
+            console.log(pt);
+            console.log("data is not there");
+        }
     }
     const deletePost = async() => {
         const tkn = localStorage.getItem("token");
@@ -50,7 +61,9 @@ const PostById = () => {
     }
     useEffect(() => {
         GetPost();
-    },[])
+    }, [])
+    
+   
     return (<>
   <Navbar />
     <Sidebar/>

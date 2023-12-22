@@ -4,14 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './store/auth_context';
-
+import { StrictMode } from 'react';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <StrictMode>
   <AuthProvider>
     <React.StrictMode>
       <App />
     </React.StrictMode>
   </AuthProvider>
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

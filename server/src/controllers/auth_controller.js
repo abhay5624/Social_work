@@ -2,6 +2,7 @@ const RegisterPost = require("../models/registration");
 const ProfilePost = require("../models/profile")
 const userPostmessage = require("../models/posts");
 const JSONStream = require('JSONStream');
+const ObjectId = require('mongodb').ObjectId;
 const home = async (req, res) => {
   try {
     res.status(200).send("Hello from APP");
@@ -167,6 +168,7 @@ try {
 const GetAllPost = async (req,res) => {
   try {
     const posts = await userPostmessage.find();
+    console.log(posts);
     res.status(200).json({posts});
   } catch (error) {
     res.status(500).json({msg: "unauthorized user"});
@@ -186,8 +188,7 @@ const SearchPersonHandle = async (req,res) => {
   }
 }
 const SearchPostHandle = async (req,res) => {
-    const type = req.query.name;
-
+    const type = new ObjectId(`${req.query.name}`);
 }
 const PostDelete = async (req,res) => {
   const posts = await userPostmessage.findOne({_id: req.body.id});
@@ -208,6 +209,22 @@ const PostDelete = async (req,res) => {
       
     }
 }
+
+
+const SearchPostById = async (req, res) => {
+  try {
+    var id =req.query.id;       
+    const data = await userPostmessage.findById(`${id}`);
+    if (data) {
+      res.status(200).json({ data });
+    } else {
+      res.status(404).json({ msg: "Post not found",data });
+    }
+  } catch (error) {
+    res.status(500).json({ msg: "Internal server error" });
+  }
+};
+
 const updatePost = async (req,res) => {
   try {
       const { id,postImg, title, description,tags} = req.body;
@@ -244,4 +261,4 @@ const GetAllPostByStream = async () => {
         
       }
 }
-module.exports = { home,updatePost,GetAllPostByStream,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};
+module.exports = { home,updatePost,SearchPostById,GetAllPostByStream,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};
