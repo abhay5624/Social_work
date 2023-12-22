@@ -21,9 +21,6 @@ app.use(
       credentials: true,
     })
   );
-router.route("/").get((req,res) => {
-res.status(200).send("Hello from APP")
-})
 
 connectDb().then(() => {
 app.listen(PORT, () => {

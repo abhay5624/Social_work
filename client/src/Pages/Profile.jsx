@@ -15,8 +15,6 @@ const Profile = () => {
   return (
 
     <>
-    <Navbar />
-    
     <div className='ProfileDiv'>
       {
         (!Data.firstName)? <div className="loader">
