@@ -13,7 +13,7 @@ const Sidebar = () => {
     <input type="checkbox" id="tg" />
    <label htmlFor="tg" id="profile-toggler">
      <div id="popen">🔘</div>
-     <div id="pclose">✖️</div>
+     <div id="pclose">❌</div>
    </label>
     <div id='sideBar'>
        

@@ -35,7 +35,7 @@ export default function Navbar() {
        
           </form>
           <button type="button" onClick={handleSearch} className="search-button">
-            Search
+            🔍
           </button>
           </div>
           <div>

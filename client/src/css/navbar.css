@@ -10,6 +10,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    position: fixed;
+    z-index: 5;
  
 }
 #toggler,#tog{
@@ -54,6 +56,8 @@ padding-left: 10px;
 border-radius: 10px;
     border: none;
     padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
     /* height: 40px; */
 }
 #close{
