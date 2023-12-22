@@ -53,8 +53,8 @@ export default function Navbar() {
               />
        
           </form>
-          <button type="button" onClick={(e) =>(handleSearch(e))} className="search-button">
-            Search
+          <button type="button" onClick={handleSearch} className="search-button">
+            🔍
           </button>
           {
             (userProfie)? (

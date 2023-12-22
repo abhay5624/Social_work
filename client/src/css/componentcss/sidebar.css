@@ -6,11 +6,14 @@ flex-direction: column;
  
 width: 0%;
 padding: 20px;
+padding-top: 70px;
 background-color: #7ccfee2e;
 backdrop-filter: blur(5px);
 /* color: white; */
 height: 100vh;
-position:relative;
+/* position:absolute ; */
+position: fixed;
+top: 0px;
 /* z-index: 10; */
 
 transition: all 0.1s;
@@ -46,23 +49,28 @@ img{
     display: none;
 }
 #profile-toggler{
-    position: absolute;
+    position:fixed;
     left: 0%;
+    top: 13px;
     /* background-color: red; */
 transition: all 0.2s;
+z-index: 10;
 
 }
 #popen{
     font-size: 30px;
+    color: white;
+    cursor: pointer;
 }
 #pclose{
     display: none;
     font-size: 20px;
+    cursor: pointer;
 }
 
 #tg:checked~#sideBar{
     visibility: visible;
-width: 30%;
+width: 22%;
 }
 #tg:checked~#profile-toggler #popen{
     display: none;
