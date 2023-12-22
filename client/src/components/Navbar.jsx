@@ -9,9 +9,28 @@ export default function Navbar() {
     setLog(isLoggedIn);
   }, [isLoggedIn]);
   const [search,setSearch]=useState();
-  const handleSearch = () => {
-    // Add your login logic here
-    console.log('You Searched:', search);
+  const [userProfie ,setUserProfile] =useState();
+  const handleSearch = async(e) => {
+    e.preventDefault();
+    try {
+      const respond = await fetch(`http://localhost:3001/api/auth/searchPerson?name=${search}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if(respond.ok){
+        const data = await respond.json();
+        console.log(data);
+        setUserProfile(data);
+        console.log("state is: ",userProfie);
+        setSearch("");
+      }else{
+        setUserProfile();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -24,11 +43,11 @@ export default function Navbar() {
 
         <div id="navmenu">
         <div className='search-form'>
-        <form>
+        <form  onSubmit={(e) =>(handleSearch(e))} >
         
             <input
               type="text" placeholder='SEARCH'
-        
+              value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="input-field"
               />
@@ -37,15 +56,29 @@ export default function Navbar() {
           <button type="button" onClick={handleSearch} className="search-button">
             🔍
           </button>
+          {
+            (userProfie)? (
+              <div className="searchProfile">
+                <div style={{display: "flex",justifyContent: "center",alignItems: "center",cursor: "pointer"}} onClick={()=> {setUserProfile()}}>
+                  <h1>X</h1>
+                </div>
+                <div>
+                  <h1>{userProfie.User.firstName}</h1>
+                  <p>{userProfie.User.email}</p>
+                </div>
+                <button>View</button>
+              </div>
+            ) : " " 
+          }
           </div>
           <div>
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
           </div>
 
           {!Log ? (
             <>
               <div>
-                <Link to="/">Login</Link>
+                <Link to="/login">Login</Link>
               </div>
               <div>
                 <Link to="/signup">Sign up</Link>
@@ -58,10 +91,10 @@ export default function Navbar() {
           )}
 
           <div>
-            <Link to="/signup">Kuch bhi</Link>
+            <Link to="/Global">Global Chat</Link>
           </div>
           <div>
-            <Link to="/Logout">Kuch bhi</Link>
+            <Link to="/ClubRoom">Club Room</Link>
           </div>
         </div>
       </div>

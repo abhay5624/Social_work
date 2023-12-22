@@ -31,9 +31,9 @@ const Search = () => {
   return (
     <AdvSrch style={{minHeight: "80vh"}}>
       <Sidebar/>
-      <div style={{marginLeft: "20%"}}>
+      <div style={{width: "100%"}}>
         <div style={{position: "relative", width: "100%", height: "300px"}}>
-          <img src={userProfile.background} style={{width: "104%",height: "100%", position: "absolute", top: "0",left: "-4%"}} alt="" />
+          <img src={userProfile.background} style={{margin:"0",width: "105%",height: "100%", position: "absolute", top: "0",left: "-5%"}} alt="" />
         <h2 style={{position: "absolute",bottom: "20px",left: "40px",color: "white"}}>Advance Search</h2>
 
         </div>
@@ -79,6 +79,7 @@ const Search = () => {
   )
 }
 const AdvSrch = styled.div`
+display:flex;
 .profile{
   padding: 10px;
   width: 400px;

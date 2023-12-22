@@ -1,6 +1,7 @@
 const RegisterPost = require("../models/registration");
 const ProfilePost = require("../models/profile")
 const userPostmessage = require("../models/posts");
+const JSONStream = require('JSONStream');
 const home = async (req, res) => {
   try {
     res.status(200).send("Hello from APP");
@@ -232,4 +233,15 @@ const updatePost = async (req,res) => {
     
 
 }
-module.exports = { home,updatePost,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};
+const GetAllPostByStream = async () => {
+      try {
+        const cursor = await userPostmessage.find();
+        const jsonStream = JSONStream.stringify();
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Transfer-Encoding', 'chunked');
+        await promisify(pipeline)(cursor.stream(), jsonStream, res);
+      } catch (error) {
+        
+      }
+}
+module.exports = { home,updatePost,GetAllPostByStream,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};

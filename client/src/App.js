@@ -15,8 +15,11 @@ import Profile from './Pages/Profile.jsx';
 import UpdateProfile from './Pages/UpdateProfile.jsx';
 import CreatePost from './Pages/CreatePost.jsx';
 import Search from './Pages/Search.jsx';
+import GlobalChat from './Pages/GlobalChat.jsx';
+import ClubRoom from './Pages/ClubRoom.jsx';
 import PostById from './Pages/PostById.jsx';
 import { useLocal } from './store/auth_context.js';
+
 function App() {
   const {setallPosts} = useLocal();
   const {setPosts} = useLocal();
@@ -28,7 +31,7 @@ function App() {
   return (
   <>
   <BrowserRouter>
-  {/*<Navbar />*/}
+    <Navbar />
     <Routes>
     <Route path='/' element={<Homepage />}/>
     <Route path='/signup' element={<Signup />}/>
@@ -39,7 +42,8 @@ function App() {
     <Route path = "/createPost" element = {<CreatePost/>} />
     <Route path = "/search" element = {<Search/>} />  
     <Route path="/post/:id" element = {<PostById/>} />
-
+    <Route path="/Global" element={<GlobalChat/>}/>
+    <Route  path = "/ClubRoom" element={<ClubRoom/>}/>
     </Routes>
     <Footer />
   </BrowserRouter>

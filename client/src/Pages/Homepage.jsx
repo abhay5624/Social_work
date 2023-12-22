@@ -22,7 +22,6 @@ useEffect(() => {
   return (
   (
     <>
-    <Navbar/>
     <div style={{display: 'flex'}}>
     <Sidebar/>
     <div className='homepage'>
