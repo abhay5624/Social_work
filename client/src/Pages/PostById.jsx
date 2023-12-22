@@ -81,7 +81,7 @@ const PostById = () => {
             )): ""}
         </div>
     </div>
-    <UpdatePopup data={data}/>
+        {/*<UpdatePopup data={data}/>*/}
     </>
   )
 }
