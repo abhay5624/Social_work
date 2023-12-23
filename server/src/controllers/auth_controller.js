@@ -188,7 +188,15 @@ const SearchPersonHandle = async (req,res) => {
   }
 }
 const SearchPostHandle = async (req,res) => {
-    const type = new ObjectId(`${req.query.name}`);
+  try {
+    const tag = req.query.tag;
+    const postTag = await userPostmessage.find({tags: { $elemMatch: { $eq: tag } }});
+    console.log(postTag);
+    res.status(200).json({postTag});
+  } catch (error) {
+    res.status(500).json({msg: "post not found"});
+  }
+    
 }
 const PostDelete = async (req,res) => {
   const posts = await userPostmessage.findOne({_id: req.body.id});
@@ -209,7 +217,24 @@ const PostDelete = async (req,res) => {
       
     }
 }
+ const searchPostByDate = async (req,res) => {
+  const dt = new Date;
+  const date = dt.toISOString().split('T')[0];
+ console.log(date);
+  try {      
+    const postDates = await userPostmessage.find({date: { $regex: date, $options: 'i' } });
+      console.log(postDates);
+      if(postDates){
+        res.status(200).json(postDates);
+      }else{
+        res.status(404).json("no post today");
+      }
 
+    
+  } catch (error) {
+    res.status(401).json("internal error occure")
+  }
+ }
 
 const SearchPostById = async (req, res) => {
   try {
@@ -261,4 +286,4 @@ const GetAllPostByStream = async () => {
         
       }
 }
-module.exports = { home,updatePost,SearchPostById,GetAllPostByStream,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};
+module.exports = { home,updatePost,searchPostByDate,SearchPostById,GetAllPostByStream,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};

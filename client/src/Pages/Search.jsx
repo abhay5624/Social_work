@@ -6,7 +6,33 @@ const Search = () => {
   const {userProfile} = useLocal();
   const {Data} = useLocal();
   const [Search, setSearch] = useState();
+  const [tag,setTag]  = useState();
   const [userName, setUserName] = useState();
+  const [searchposts , setSearchPosts] = useState();
+  const SearchByDate =()=> {
+
+  }
+  const SearchByTag = async(e) => {
+    e.preventDefault();
+    try {
+      const tkn = localStorage.getItem("token")
+      const respond = await fetch(`http://localhost:3001/api/auth/searchPost?tag=${tag}`,{
+          headers: {
+            Authorization: `Bearer ${tkn}`
+          }
+      });
+      if(respond.ok){
+        const data = await respond.json();
+        setSearchPosts(await data.postTag);
+        console.log(data.postTag);
+        setTag("");
+      }else{
+        console.log("post not found");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const HandleSearch = async(e) => {
       e.preventDefault();
       try {
@@ -61,17 +87,30 @@ const Search = () => {
               <input type="text" name="searchValue" placeholder='Enter Title'/>
               <button type="submit">Search</button>
           </form>
-          <form >
-              <input type="text" name="searchValue" placeholder='Enter Tag'/>
-              <button type="submit">Search</button>
+          <form onSubmit={(e) => {SearchByTag(e)}}>
+              <input type="text" name="searchValue" placeholder='Enter Tag' value={tag} onChange={(e) => {setTag(e.target.value)}}/>
+              <button type="submit" onChange={(e) => {SearchByTag(e)}}>Search</button>
           </form>
           <div className='tags'>
-            <div className="tag">This Month</div>
-            <div className="tag">This Year</div>
-            <div className="tag">Event</div>
-            <div className="tag">Society</div>
-            <div className="tag">Nit</div>
+            <div className="tag" onClick={() => {SearchByDate()}}>This Month</div>
+            <div className="tag" onClick={() => {SearchByDate()}}>This Year</div>
+            <div className="tag" onClick={() => {SearchByDate()}}>Today</div>
           </div>
+          {
+            searchposts ? searchposts.map((e) => 
+                (<div className='post'>
+                  <img src={e.postImg} alt="" />
+                  <div className='content'>
+                  <h3>{e.title}</h3>
+                  <p>{e.description}</p>{
+                    e.tags ? e.tags.map((tg) => (
+                      <button style={{margin: "5px"}}>{tg}</button>
+                    )): ""
+                  }
+                  </div>
+                </div>
+            )): ""
+          }
         </div>
         </div>
     </div>
@@ -90,6 +129,18 @@ display:flex;
 .tags{
   display: flex;
   flex-wrap: wrap;
+}
+.post{
+  display: flex;
+  padding: 10px;
+  .content{
+padding: 20px;
+  }
+  img{
+    width: 300px;
+    border-radius: 5px;
+  }
+
 }
 .tag{
   border: 1px solid black;
