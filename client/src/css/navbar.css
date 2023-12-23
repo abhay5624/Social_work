@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    position: fixed;
+    /* position: fixed; */
     z-index: 5;
  
 }
@@ -92,6 +92,7 @@ border-radius: 10px;
     height: 190px;
     background-color: #d1cde55a;
     backdrop-filter: blur(20px);
+    z-index: 2
 }
 #navmenu a{
     color: white;
@@ -119,6 +120,8 @@ border-radius: 10px;
         width: 100%;
         left: 0px;
         color: black;
+    z-index: -1;
+
         /* background-color: red; */
         /* overflow: hidden; */
     }

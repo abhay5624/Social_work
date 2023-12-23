@@ -32,7 +32,8 @@ export default function Homepage() {
         {allPost ?
             allPost.map((post) => (
               <div className='post-card' key={post._id}>
-                <img src={post.postImg} alt="" />
+               <div className='post-card-image' style={  {backgroundImage: `url(${
+                process.env.PUBLIC_URL + post.postImg})`}}> <img src={post.postImg} alt="" /></div>
                 <h3>{post.title}</h3>
                 <p>{post.description}</p>
               </div>

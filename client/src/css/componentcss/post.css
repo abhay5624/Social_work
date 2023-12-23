@@ -16,7 +16,7 @@
 .ptdiv{
     width: 250px;
     height: auto;
-    background-color: gray;
+    /* background-color: gray; */
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -26,16 +26,25 @@
 }
 .ptdivimage{
     width: 100%;
-    height: 200px;
-    background-color: red;
+    height: auto;
+    box-shadow: 0 0 10px rgb(190, 181, 181);
+
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
 }
 .ptdiv img{
     margin-top: 0vh;
-    /* width: 100%; */
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 20px;
+backdrop-filter: blur(20px);
     
+}
+.ptdiv:hover{
+    transform: scale(20px);
 }
 .tags{
     width: auto;
