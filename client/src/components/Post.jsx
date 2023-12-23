@@ -15,9 +15,12 @@ const Post = () => {
            posts? posts.map((data) => {
             return (
             <div className="ptdiv" key={data._id}>
+                <div className='ptdivimage' style={  {backgroundImage: `url(${
+                process.env.PUBLIC_URL + data.postImg})`}}>
                 <img src={data.postImg} alt="This is user image" />
+                </div>
                 <h3>{data.title}</h3>
-                <p>{data.description}</p>
+                <p>{data.description.slice(0, 80)+"..."}</p>
                 <div className='tags'>
                   {data.tags.map((e) => (
                     <button className='tag'>{e}</button>

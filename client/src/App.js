@@ -31,7 +31,7 @@ function App() {
   return (
   <>
   <BrowserRouter>
-    <Navbar />
+    {/* <Navbar /> */}
     <Routes>
     <Route path='/' element={<Homepage />}/>
     <Route path='/signup' element={<Signup />}/>
@@ -45,7 +45,7 @@ function App() {
     <Route path="/Global" element={<GlobalChat/>}/>
     <Route  path = "/ClubRoom" element={<ClubRoom/>}/>
     </Routes>
-    <Footer />
+    {/* <Footer /> */}
   </BrowserRouter>
   </>
   );

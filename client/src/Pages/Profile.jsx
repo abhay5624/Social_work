@@ -7,6 +7,7 @@ import Post from '../components/Post';
 import { useNavigate } from 'react-router-dom';
 import '../css/pagecss/profile.css'
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.jsx';
 import Sidebar from '../components/Sidebar';
 const Profile = () => {
     const {Data} = useLocal();
@@ -15,6 +16,7 @@ const Profile = () => {
   return (
 
     <>
+    <Navbar />
     <div className='ProfileDiv'>
       {
         (!Data.firstName)? <div className="loader">
@@ -47,6 +49,7 @@ const Profile = () => {
         </>
       }
     </div>
+    <Footer/>
       </>
   )
 }
