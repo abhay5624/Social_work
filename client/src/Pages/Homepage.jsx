@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import '../css/homepage.css'
 import Navbar from '../components/Navbar.jsx'
+import Footer from '../components/Footer.jsx'
 import { useLocal } from '../store/auth_context';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
@@ -21,6 +22,7 @@ export default function Homepage() {
   return (
   (
     <>
+    <Navbar />
     <div style={{display: 'flex',minHeight: "100vh"}}>
     <Sidebar/>
     <div className='homepage'>
@@ -30,7 +32,8 @@ export default function Homepage() {
         {allPost ?
             allPost.map((post) => (
               <div className='post-card' key={post._id}>
-                <img src={post.postImg} alt="" />
+               <div className='post-card-image' style={  {backgroundImage: `url(${
+                process.env.PUBLIC_URL + post.postImg})`}}> <img src={post.postImg} alt="" /></div>
                 <h3>{post.title}</h3>
                 <p>{post.description}</p>
               </div>
@@ -50,6 +53,7 @@ export default function Homepage() {
       </div>     */}
     </div>
     </div>
+    <Footer/>
       </>
     ))
 }
