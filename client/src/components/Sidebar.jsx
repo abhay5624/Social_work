@@ -2,7 +2,8 @@ import React from 'react'
 import { useLocal } from '../store/auth_context'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import '../css/componentcss/sidebar.css'
+import '../css/componentcss/sidebar.css';
+import Burger from '../Assets/icons/Hamburger_icon.png'
 const Sidebar = () => {
     const {Data} = useLocal();
     const {userProfile} = useLocal();
@@ -12,7 +13,9 @@ const Sidebar = () => {
 
     <input type="checkbox" id="tg" />
    <label htmlFor="tg" id="profile-toggler">
-     <div id="popen">🔘</div>
+     <div id="popen">
+                  <img src={Burger} alt="" />
+                </div>
      <div id="pclose">❌</div>
    </label>
     <div id='sideBar'>
