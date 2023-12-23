@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/navbar.css";
 import { useLocal } from "../store/auth_context";
+import Logo from "../Assets/Image/nithub.jpg"
+
 export default function Navbar() {
   const { isLoggedIn } = useLocal();
   const [Log, setLog] = useState(isLoggedIn);
@@ -40,8 +42,11 @@ export default function Navbar() {
           <div id="menu">toggler</div>
           <div id="close">close</div>
         </label>
-
+        {/* <div style={{height:'70px' , backgroundSize: "contain",objectFit:"cover"}}>
+          <img src={Logo} alt="" />
+          </div> */}
         <div id="navmenu">
+
         <div className='search-form'>
         <form  onSubmit={(e) =>(handleSearch(e))} >
         
@@ -71,6 +76,7 @@ export default function Navbar() {
             ) : " " 
           }
           </div>
+         
           <div>
             <Link to="/">Home</Link>
           </div>

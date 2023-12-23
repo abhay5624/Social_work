@@ -15,7 +15,9 @@ const Post = () => {
            posts? posts.map((data) => {
             return (
             <div className="ptdiv" key={data._id}>
+                <div className='ptdivimage'>
                 <img src={data.postImg} alt="This is user image" />
+                </div>
                 <h3>{data.title}</h3>
                 <p>{data.description}</p>
                 <div className='tags'>

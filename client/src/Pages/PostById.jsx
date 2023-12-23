@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import { useLocation ,useNavigate} from 'react-router-dom'
 import { useLocal } from '../store/auth_context';
 import styled from 'styled-components';
+import Loader from '../Assets/Image/loader.gif'
 import '../css/pagecss/PostById.css'
 import Sidebar from '../components/Sidebar';
 import UpdatePopup from '../components/UpdatePopup';
@@ -70,20 +71,21 @@ const PostById = () => {
     <div className='PostDivById'>
             
         <div className='topheading'>
-            <h2 style={{gridColumn: "span 2"}}>My Post</h2>
+            <h2 >My Post</h2>
             <button className='Dlt' onClick={() => {deletePost()}}>Delete</button>
         </div>
         
         <div className='mainpostbox'>
-            <div className='leftpost'>
+            <div className='leftpost ' style={  {backgroundImage: `url(${
+                process.env.PUBLIC_URL + (data.postImg)?"":Loader})`}}>
             <h3>{data.title}</h3><br/>
             <p>{data.description}</p>
             <button className='EdtPst'>Edit</button>
             </div>
             <div className='rightpost' style={  {backgroundImage: `url(${
-                process.env.PUBLIC_URL + data.postImg})`}}>
-
-            <img src={data.postImg} alt="" />
+                process.env.PUBLIC_URL + (data.postImg)?data.postImg:Loader})`}}>
+                    
+            <img src={(data.postImg)?data.postImg:Loader} alt="" />
             </div>
 
       
