@@ -22,5 +22,7 @@ router.route("/searchPost").get(authController.SearchPostHandle);
 router.route("/post").delete(postMiddleware,authController.PostDelete);
 router.route("/post").put(postMiddleware,authController.updatePost);
 router.route("/postById").get(postMiddleware,authController.SearchPostById);
-router.route("/postByDate").get(postMiddleware,authController.searchPostByDate)
+router.route("/posttoday").get(postMiddleware,authController.searchToday);
+router.route("/postmonth").get(postMiddleware,authController.searchMonth);
+router.route("/postyear").get(postMiddleware,authController.searchYear);
 module.exports = router;

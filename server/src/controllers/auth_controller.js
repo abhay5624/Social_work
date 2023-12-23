@@ -2,7 +2,7 @@ const RegisterPost = require("../models/registration");
 const ProfilePost = require("../models/profile")
 const userPostmessage = require("../models/posts");
 const JSONStream = require('JSONStream');
-const ObjectId = require('mongodb').ObjectId;
+const dt = new Date;
 const home = async (req, res) => {
   try {
     res.status(200).send("Hello from APP");
@@ -135,9 +135,13 @@ const user = async (req,res) => {
 };
 const userPosts = async (req,res) => {
     try {
+      const date = new Date;
+      const day = date.getDate();
+      const month = date.getMonth();
+      const year = date.getFullYear();
       const { postImg, title, description,tags} = req.body;
       const PostCreation = await userPostmessage.create({
-        userID: req.userId, postImg, title, description,tags
+        userID: req.userId, postImg, title, description,tags,day,month,year
       });
       res.status(201)
       .json({
@@ -217,25 +221,26 @@ const PostDelete = async (req,res) => {
       
     }
 }
- const searchPostByDate = async (req,res) => {
-  const dt = new Date;
-  const date = dt.toISOString().split('T')[0];
- console.log(date);
-  try {      
-    const postDates = await userPostmessage.find({date: { $regex: date, $options: 'i' } });
-      console.log(postDates);
-      if(postDates){
-        res.status(200).json(postDates);
-      }else{
-        res.status(404).json("no post today");
-      }
-
+ const searchToday = async (req,res) => {
     
+    const day = dt.getDate();
+    try {      
+      const postDates = await userPostmessage.find({day});
+      res.status(200).json(await postDates);
+    } catch (error) {
+      res.status(401).json("internal error occure")
+    }
+}
+const searchMonth = async(req,res) => {
+  const month = dt.getMonth();
+  console.log(month);
+  try {
+  const postData = await userPostmessage.find({month});
+  res.status(200).json(await postData);
   } catch (error) {
-    res.status(401).json("internal error occure")
+    res.status(401).json({msg: "no post this month"});
   }
- }
-
+}
 const SearchPostById = async (req, res) => {
   try {
     var id =req.query.id;       
@@ -249,7 +254,16 @@ const SearchPostById = async (req, res) => {
     res.status(500).json({ msg: "Internal server error" });
   }
 };
-
+const searchYear = async (req,res) => {
+  const year = dt.getFullYear();
+  try {
+    const postData = await userPostmessage.find({year});
+    console.log(postData);
+    res.status(200).json(await postData);
+  } catch (error) {
+    res.status(400).json({msg: "no post this year"});
+  }
+}
 const updatePost = async (req,res) => {
   try {
       const { id,postImg, title, description,tags} = req.body;
@@ -286,4 +300,4 @@ const GetAllPostByStream = async () => {
         
       }
 }
-module.exports = { home,updatePost,searchPostByDate,SearchPostById,GetAllPostByStream,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};
+module.exports = { home,updatePost,searchToday,searchYear,searchMonth,SearchPostById,GetAllPostByStream,PostDelete,SearchPersonHandle,SearchPostHandle, register, register_post,Login_Post,user,profileAdd,ProfileGet, userPosts,GetProfile,GetAllPost};

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const date = new Date;
 const userposts = new mongoose.Schema({
     postImg: {type: String},
     userID: {
@@ -16,9 +17,17 @@ const userposts = new mongoose.Schema({
     tags: {
         type: [String],
     },
-    date: {
-        type: Date,
-        default: Date.now
+    day: {
+        type: String,
+         
+    },
+    month: {
+        type: String,
+         
+    },
+    year: {
+        type: String,
+         
     }
 })
 
