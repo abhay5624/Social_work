@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/navbar.css";
 import { useLocal } from "../store/auth_context";
-import Logo from "../Assets/Image/nithub.jpg"
+import Logo from '../Assets/icons/logo-01.svg'
+import Name from '../Assets/icons/name.svg'
 
 export default function Navbar() {
   const { isLoggedIn } = useLocal();
@@ -37,6 +38,10 @@ export default function Navbar() {
   return (
     <>
       <div id="navbar">
+        <div className="navlogo">
+            <img src={Logo} alt="" />
+            <img src={Name} alt="" />
+        </div>
         <input type="checkbox" id="toggler" />
         <label htmlFor="toggler" id="tog">
           <div id="menu">toggler</div>
