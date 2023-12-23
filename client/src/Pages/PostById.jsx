@@ -39,7 +39,7 @@ const PostById = () => {
         const tkn = localStorage.getItem("token");
         try {
             const dataToSend  = {
-                id: data._id[1],
+                id: data._id,
                 userId: posts[0].userID,
             }
             console.log(dataToSend);
