@@ -19,6 +19,7 @@ const PostById = () => {
         tags: [],
     });
     //console.log("This is from post: ",data);
+    const [popup , setPopup] = useState(0);
     const Navigate = useNavigate();
     const GetPost = async () => {
         const tkn = localStorage.getItem("token");
@@ -72,7 +73,12 @@ const PostById = () => {
             
         <div className='topheading'>
             <h2 >My Post</h2>
+            <div>
+
             <button className='Dlt' onClick={() => {deletePost()}}>Delete</button>
+            <button className='EdtPst' onClick={()=>{setPopup(!popup)}} style={{zIndex:"1"}}>{(popup)?"❌":"Edit"}</button>
+
+            </div>
         </div>
         
         <div className='mainpostbox'>
@@ -80,7 +86,7 @@ const PostById = () => {
                 process.env.PUBLIC_URL + (data.postImg)?"":Loader})`}}>
             <h3>{data.title}</h3><br/>
             <p>{data.description}</p>
-            <button className='EdtPst'>Edit</button>
+
             </div>
             <div className='rightpost' style={  {backgroundImage: `url(${
                 process.env.PUBLIC_URL + (data.postImg)?data.postImg:Loader})`}}>
@@ -96,8 +102,13 @@ const PostById = () => {
             )): ""}
         </div>
     </div>
-        {/*<UpdatePopup data={data}/>*/}
-    </>
+    {
+    
+    (popup)?<UpdatePopup data={data}/>:""
+        
+    
+    }
+        </>
   )
 }
 // const PostDiv = styled.div`
