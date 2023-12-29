@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.updateprofile{
+    width: 70%;
+    margin-left: 15%;
+    height: 75vh;
+    /* background-color: red; */
+box-shadow: 0 0 10px gray;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+.updateleft{
+    width: 40%;
+    background-color: rgba(240, 248, 255, 0.585);
+    height: 80%;
+
+}
+
+.updateright{
+    width: 45%;
+    /* background-color: aliceblue; */
+    height: 80%;
+  
+    /* background-color: aliceblue; */
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+justify-content: center;
+gap: 200px  ;
+
+}
+.updateright form{
+    width: 90%;
+    /* background-color: red; */
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+justify-content: center;
+}
+.updateright input{
+    width: 100%;
+    height: 50px;
+    outline: none;
+    border: none;
+ 
+}
+.updateright input:focus{
+    border-bottom: 2px solid black;
+}
+
+#avatar,#background{
+display: none;
+}
+.photobox{
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    font-size: 40px;
+}
+.photobox label{
+    cursor: pointer;
+}
+.bgrnd{
+    width: 100%;
+    height: 40%;
+    margin-top: 0px;
+    background-color: rgba(163, 232, 246, 0.592);
+}
+.avtr{
+  width: 25%;
+  height: 110px;
+    border-radius: 50%;
+    position: relative;
+    left: 4%;
+    top: -20%;
+    border: 5px solid white;
+    background-color: rgb(216, 176, 255);
+    
+}
+.profiledetails{
+    width: 55%;
+    /* background-color: red;    */
+    position: relative;
+    top: -35%;
+    left: 32%;
+}
+

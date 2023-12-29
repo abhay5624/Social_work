@@ -17,6 +17,7 @@ const Profile = () => {
 
     <>
     <Navbar />
+    <Sidebar/>
     <div className='ProfileDiv'>
       {
         (!Data.firstName)? <div className="loader">

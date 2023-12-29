@@ -16,6 +16,7 @@
     /* background-color: red; */
     position: relative;
     /* top: -50px; */
+    /* z-index: -1; */
 }
 .backdroundDiv{
     width: 100%;
@@ -40,6 +41,7 @@
     position: relative;
     top: -15vh;
     left: 50px;
+   
 }
 .avatar img{
 
@@ -47,6 +49,7 @@
     height: auto;
     border-radius: 50%;
     border: 5px solid white;
+    box-shadow: 0 0 10px gray;
 }
 .nameDetail{
 width: 80%;
@@ -67,6 +70,7 @@ top: 10px;
      color: rgb(172, 172, 172);
      /* background: #190582; */
      border: none;
-  
+  cursor: pointer;
+  z-index: 0;
      font-size: 15px;
 }

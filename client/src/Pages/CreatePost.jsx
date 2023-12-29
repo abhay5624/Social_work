@@ -80,17 +80,20 @@ const CreatePost = () => {
                         📷
                     </label>
                         
-                        <div className="addbtn" onClick={(e) => {setPostData({...PostData, tags: [...PostData.tags,tag]})}}>Add Tags</div>
+                       
+                        <div className="addbtn" style={{pointerEvents:!tag?"none":"auto"}}   onClick={(e) => {setPostData({...PostData, tags: [...PostData.tags,tag]})}}>➕</div>
                         <input type="text" name='tags' placeholder='Enter New Tag' onChange={(e) => {setTag(e.target.value)}}/>
-                        <div className='tags' style={{width: "100%"}}>
+                        <div className='tags' style={{width: "100%",height:"40px"}}>
                         {
                             PostData.tags.map((element)=> (
-                                <button style={{margin: "5px"}}>{element}</button>
+                                <button className='tagbtn' style={{margin: "5px"}}>{element}<button className='tagcancel'>❌</button></button>
+                                
                                 ))
                             }
+
                         </div> 
-                
-                    <button type="submit">Submit</button>
+                <br/>
+                    <button type="submit" className='sbmt'>Post</button>
                 </form>
             </div>
             <div className='Post'>
